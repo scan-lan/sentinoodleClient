@@ -1,8 +1,9 @@
 import React from "react";
+import {Typography} from "@mui/material";
 
 const Test = () =>
   <>
-    <h1 style={{textAlign: "center"}}>{"TEST!! <3"}</h1>
+    <Typography component="h1" >{"TEST!! <3"}</Typography>
   </>
 
 export default Test;

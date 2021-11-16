@@ -7,14 +7,24 @@ import {
 
 import Home from "../../routes/Home";
 import Test from "../../routes/Test";
+import { ThemeProvider, createTheme } from "@mui/material";
+
+
+const theme = createTheme({
+  palette: {
+    mode: "dark"
+  }
+})
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="test" element={<Test />} />
-      </Routes>
+      <ThemeProvider theme={theme} >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="test" element={<Test />} />
+        </Routes>
+      </ThemeProvider>
     </div>
   );
 }

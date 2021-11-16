@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const Home = () => (
   <div>
     <Button variant="contained">No sleep needed</Button>
+    <br/>
     <Link to={"Test"}>{"Test < 3"}</Link>
   </div>
 );
