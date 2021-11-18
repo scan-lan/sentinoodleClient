@@ -6,7 +6,9 @@ const Home = () => (
   <div>
     <Button variant="contained">No sleep needed</Button>
     <br/>
-    <Link to="test"><MUILink>{"Test <3"}</MUILink></Link>
+    <MUILink component={Link} to="test">
+      {"Test <3"}
+    </MUILink>
   </div>
 );
 
