@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {
   Routes,
   Route
@@ -7,25 +6,29 @@ import {
 
 import Home from "../../routes/Home";
 import Test from "../../routes/Test";
-import { ThemeProvider, createTheme } from "@mui/material";
+import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 
 
 const theme = createTheme({
   palette: {
-    mode: "dark"
+    mode: "dark",
+  },
+  typography: {
+    fontFamily: "Atkinson Hyperlegible, sans-serif"
   }
 })
 
 function App() {
   return (
-    <div className="App">
-      <ThemeProvider theme={theme} >
+    <ThemeProvider theme={theme} >
+      <CssBaseline />
+      <Container maxWidth="md">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="test" element={<Test />} />
         </Routes>
-      </ThemeProvider>
-    </div>
+      </Container>
+    </ThemeProvider>
   );
 }
 
