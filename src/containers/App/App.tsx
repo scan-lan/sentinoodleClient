@@ -23,14 +23,20 @@ const theme = createTheme({
 
 const App = () => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleDrawerToggle = () => { setMobileOpen(!mobileOpen); };
+  const toggleDrawer = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  const routes = [
+    {route: "/", text: "Home"},
+    {route: "test", text: "Test"}
+  ]
 
   return (
     <ThemeProvider theme={theme} >
       <CssBaseline />
-      <NavBar onMenuClick={handleDrawerToggle} />
+      <NavBar onMenuClick={toggleDrawer} />
       <Box sx={{ display: 'flex' }}>
-        <Drawer />
+        <Drawer drawerToggle={toggleDrawer} mobileOpen={mobileOpen} routes={routes} />
         <Container maxWidth="md">
           <Routes>
             <Route path="/" element={<Home />} />

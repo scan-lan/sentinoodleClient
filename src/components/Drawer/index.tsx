@@ -1,65 +1,32 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
 import MUIDrawer from '@mui/material/Drawer';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
-import Toolbar from '@mui/material/Toolbar';
+import DrawerContent from "../DrawerContent";
 
 const drawerWidth = 240;
 
+interface DrawerProps {
+  drawerToggle: () => void,
+  mobileOpen: boolean,
+  routes: {
+    route: string,
+    text: string
+  }[]
+}
 
-
-export default function Drawer() {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-
-  const drawerContent = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
+const Drawer = ({ drawerToggle, mobileOpen, routes }: DrawerProps) => {
+  const drawerContent = <DrawerContent routes={routes} clickHandler={drawerToggle} />
 
   return (
     <Box
       component="nav"
       sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-      aria-label="mailbox folders"
+      aria-label="side bar"
     >
-       {/*The implementation can be swapped with js to avoid SEO duplication of links. */}
       <MUIDrawer
         variant="temporary"
         open={mobileOpen}
-        onClose={handleDrawerToggle}
+        onClose={drawerToggle}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
@@ -83,3 +50,5 @@ export default function Drawer() {
     </Box>
   );
 }
+
+export default Drawer;
