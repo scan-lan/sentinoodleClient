@@ -16,14 +16,14 @@ interface DrawerContentProps {
 const DrawerContent = ({ routes, clickHandler }: DrawerContentProps) => (
   <List>
     {routes.map(({route, text}) => (
-      <>
-        <ListItem key={text}>
+      <div key={text}>
+        <ListItem>
           <ListItemButton onClick={clickHandler} component={Link} to={route}>
             {text}
           </ListItemButton>
         </ListItem>
         <Divider />
-      </>
+      </div>
     ))}
   </List>
 )

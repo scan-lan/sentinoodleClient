@@ -3,13 +3,14 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-
-import Home from "../../routes/Home";
-import Test from "../../routes/Test";
-import NavBar from "../../components/NavBar";
-import Drawer from "../../components/Drawer";
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Box from "@mui/material/Box";
+
+import AddMessage from "../../routes/AddMessage";
+import Drawer from "../../components/Drawer";
+import Home from "../../routes/Home";
+import NavBar from "../../components/NavBar";
+import Test from "../../routes/Test";
 
 
 const theme = createTheme({
@@ -28,6 +29,7 @@ const App = () => {
   };
   const routes = [
     {route: "/", text: "Home"},
+    {route: "messages", text: "Add message"},
     {route: "test", text: "Test"}
   ]
 
@@ -37,10 +39,11 @@ const App = () => {
       <NavBar onMenuClick={toggleDrawer} />
       <Box sx={{ display: 'flex' }}>
         <Drawer drawerToggle={toggleDrawer} mobileOpen={mobileOpen} routes={routes} />
-        <Container maxWidth="md">
+        <Container maxWidth="sm">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="test" element={<Test />} />
+            <Route path="messages" element={<AddMessage />} />
           </Routes>
         </Container>
       </Box>

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 const Home = () => (
   <div>
-    <Button variant="contained">No sleep needed</Button>
+    <Button variant="contained">button</Button>
     <br/>
     <MUILink component={Link} to="test">
       {"Test <3"}
