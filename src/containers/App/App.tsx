@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from "axios";
 import {
   Routes,
   Route
@@ -11,6 +12,14 @@ import Drawer from "../../components/Drawer";
 import Home from "../../routes/Home";
 import NavBar from "../../components/NavBar";
 import Test from "../../routes/Test";
+
+const api = axios.create({
+  baseURL: "https://sentinoodle.nw.r.appspot.com/",
+  timeout: 1000,
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
 
 
 const theme = createTheme({
@@ -43,7 +52,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="test" element={<Test />} />
-            <Route path="messages" element={<AddMessage />} />
+            <Route path="messages" element={<AddMessage api={api} />} />
           </Routes>
         </Container>
       </Box>

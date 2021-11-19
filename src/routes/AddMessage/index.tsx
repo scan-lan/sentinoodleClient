@@ -3,15 +3,21 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from "@mui/material/Typography";
+import { AxiosInstance } from "axios";
 
 
-const AddMessage = () => {
+const AddMessage = ({ api }: { api: AxiosInstance }) => {
   const [deviceId, setDeviceId] = useState<string>("");
   const [messageText, setMessageText] = useState<string>("");
 
-  const onSubmitHandler = (e: FormEvent) => {
-    console.log(`deviceId: ${deviceId}\nmessage: ${messageText}`)
-    e.preventDefault()
+  const onSubmitHandler = async (e: FormEvent) => {
+    e.preventDefault();
+    const requestBody = {
+      device_id: deviceId,
+      message_text: messageText
+    }
+    const response = await api.post("/message", requestBody);
+    console.dir(response);
   }
 
   return (
