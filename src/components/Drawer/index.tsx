@@ -6,7 +6,7 @@ import DrawerContent from "../DrawerContent";
 const drawerWidth = 240;
 
 interface DrawerProps {
-  drawerToggle: () => void,
+  setMobileOpen: (newState: boolean) => void,
   mobileOpen: boolean,
   routes: {
     route: string,
@@ -14,8 +14,11 @@ interface DrawerProps {
   }[]
 }
 
-const Drawer = ({ drawerToggle, mobileOpen, routes }: DrawerProps) => {
-  const drawerContent = <DrawerContent routes={routes} clickHandler={drawerToggle} />
+const Drawer = ({ setMobileOpen, mobileOpen, routes }: DrawerProps) => {
+  const toggleDrawer = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  const drawerContent = <DrawerContent routes={routes} clickHandler={() => setMobileOpen(false)} />
 
   return (
     <Box
@@ -26,7 +29,7 @@ const Drawer = ({ drawerToggle, mobileOpen, routes }: DrawerProps) => {
       <MUIDrawer
         variant="temporary"
         open={mobileOpen}
-        onClose={drawerToggle}
+        onClose={toggleDrawer}
         ModalProps={{
           keepMounted: true, // Better open performance on mobile.
         }}
