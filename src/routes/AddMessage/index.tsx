@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Typography from "@mui/material/Typography";
 import { AxiosInstance } from "axios";
 import Session from "../../schemas/Session";
+import Message from "../../schemas/Message";
 
 
 const AddMessage = ({ api }: { api: AxiosInstance }) => {
@@ -18,7 +19,7 @@ const AddMessage = ({ api }: { api: AxiosInstance }) => {
       session_id: session.data.id,
       message_text: messageText
     }
-    const response = await api.post("/message", requestBody);
+    const response = await api.post<Message>("/message", requestBody);
     console.dir(response);
   }
 
