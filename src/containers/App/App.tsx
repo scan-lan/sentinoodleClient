@@ -6,14 +6,17 @@ import {
 } from "react-router-dom";
 import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import Box from "@mui/material/Box";
+import dotenv from "dotenv";
 
 import AddMessage from "../../routes/AddMessage";
 import Drawer from "../../components/Drawer";
 import Home from "../../routes/Home";
 import NavBar from "../../components/NavBar";
 import Test from "../../routes/Test";
+dotenv.config()
 
-const baseURL = process.env.API_URL ? process.env.API_URL : "https://sentinoodle.nw.r.appspot.com";
+// const baseURL = process.env.API_URL ? process.env.API_URL : "https://sentinoodle.nw.r.appspot.com";
+const baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "http://77.100.88.87:5000";
 const api = axios.create({
   baseURL,
   timeout: 1000
