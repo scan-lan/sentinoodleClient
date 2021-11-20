@@ -13,12 +13,10 @@ import Home from "../../routes/Home";
 import NavBar from "../../components/NavBar";
 import Test from "../../routes/Test";
 
+const baseURL = process.env.API_URL ? process.env.API_URL : "https://sentinoodle.nw.r.appspot.com";
 const api = axios.create({
-  baseURL: "https://sentinoodle.nw.r.appspot.com/",
-  timeout: 1000,
-  headers: {
-    "Content-Type": "application/json"
-  }
+  baseURL,
+  timeout: 1000
 })
 
 

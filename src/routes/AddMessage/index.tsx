@@ -1,9 +1,10 @@
-import React, {FormEvent, useState} from 'react';
+import React, { FormEvent, useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from "@mui/material/Typography";
 import { AxiosInstance } from "axios";
+import Session from "../../schemas/Session";
 
 
 const AddMessage = ({ api }: { api: AxiosInstance }) => {
@@ -12,8 +13,9 @@ const AddMessage = ({ api }: { api: AxiosInstance }) => {
 
   const onSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
+    const session = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
     const requestBody = {
-      device_id: deviceId,
+      session_id: session.data.id,
       message_text: messageText
     }
     const response = await api.post("/message", requestBody);
