@@ -4,16 +4,11 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from "@mui/material/Typography";
 import { AxiosInstance } from "axios";
+import AlertState from "../../schemas/AlertState";
+import Alert from "../../components/Alert";
 import Session from "../../schemas/Session";
 import Message from "../../schemas/Message";
-import Alert from "../../components/Alert";
 
-
-interface AlertState {
-  text: string,
-  type: "error" | "success"
-  open: boolean
-}
 
 const AddMessage = ({ api }: { api: AxiosInstance }) => {
   const [deviceId, setDeviceId] = useState<string>("");

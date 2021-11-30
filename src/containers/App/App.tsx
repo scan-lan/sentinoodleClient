@@ -15,7 +15,6 @@ import NavBar from "../../components/NavBar";
 import Test from "../../routes/Test";
 dotenv.config()
 
-// const baseURL = process.env.API_URL ? process.env.API_URL : "https://sentinoodle.nw.r.appspot.com";
 const baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "http://77.100.88.87:5000";
 const api = axios.create({
   baseURL,

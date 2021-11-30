@@ -22,7 +22,9 @@ const SummaryDisplay = ({ summaryInfo }: { summaryInfo: Summary }) => {
       <List>
         <Item text="Last room entered" value={summaryInfo.last_room_entered.room} />
         <Item text="Time entered" value={new Date(summaryInfo.last_room_entered.time).toLocaleString()} />
-        <Item text="Time woke up" value={new Date(summaryInfo.time_woke_up).toLocaleString()} />
+        <Item text="Time woke up" value={(summaryInfo.time_woke_up) ?
+          new Date(summaryInfo.time_woke_up).toLocaleString() :
+          "No motion detected in the bedroom so far, today"} />
         <Item text="Messages received" value={'["' + summaryInfo.messages_received_today.join('", "') + '"]'} />
         <Item text="Last ate" value={new Date(summaryInfo.last_ate).toLocaleString()} />
       </List>
