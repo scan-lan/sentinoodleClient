@@ -55,8 +55,11 @@ const Home = ({ api }: { api: AxiosInstance }) => {
   return (
     <>
       <Alert {...alertState} setOpen={setOpen} />
-      <Typography variant="h4" align="right">
+      <Typography variant="h4" align="right" sx={{pb: "1em", pt: ".2em"}}>
         Home
+      </Typography>
+      <Typography paragraph>
+        Enter your device ID to see a summary of events from your day.
       </Typography>
       <form onSubmit={onSubmitHandler}>
         <Stack spacing={2} sx={{pt: "2em"}}>

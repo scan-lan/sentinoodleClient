@@ -54,8 +54,11 @@ const AddMessage = ({ api }: { api: AxiosInstance }) => {
   return (
     <>
       <Alert {...alertState} setOpen={setOpen} />
-      <Typography variant="h4" align="right">
+      <Typography variant="h4" align="right" sx={{pb: "1em", pt: ".2em"}}>
         Add message
+      </Typography>
+      <Typography paragraph>
+        Add a message that you want the system to give you.
       </Typography>
       <form onSubmit={onSubmitHandler}>
         <Stack spacing={2} sx={{pt: "2em"}}>
