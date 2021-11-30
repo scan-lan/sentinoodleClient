@@ -6,30 +6,61 @@ import Typography from "@mui/material/Typography";
 import { AxiosInstance } from "axios";
 import Session from "../../schemas/Session";
 import Message from "../../schemas/Message";
+import Alert from "../../components/Alert";
 
+
+interface AlertState {
+  text: string,
+  type: "error" | "success"
+  open: boolean
+}
 
 const AddMessage = ({ api }: { api: AxiosInstance }) => {
   const [deviceId, setDeviceId] = useState<string>("");
   const [messageText, setMessageText] = useState<string>("");
+  const [alertState, setAlertState] = useState<AlertState>({text: "", type: "error", open: false});
+  const showError = (text: string) => {
+    setAlertState({
+        text: text,
+        type: "error",
+        open: true
+      })
+  }
+  const showSuccess = () => {
+    setAlertState({
+        text: "Message added successfully",
+        type: "success",
+        open: true
+      })
+  }
 
   const onSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
-    const session = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
+    const { data: session } = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
     const requestBody = {
-      session_id: session.data.id,
-      message_text: messageText
+        session_id: -1,
+        message_text: messageText
+      }
+    try { requestBody.session_id = session.id; }
+    catch (e) {
+      showError("Could not find session for given device ID");
+      console.log(e)
+      return;
     }
     const response = await api.post<Message>("/message", requestBody);
-    console.dir(response);
+    if (response.status === 200) showSuccess();
+    else showError("Could not upload message");
+  }
+
+  const setOpen = (open: boolean) => {
+    setAlertState({...alertState, open: open})
   }
 
   return (
     <>
+      <Alert {...alertState} setOpen={setOpen} />
       <Typography variant="h4" align="right">
         Add message
-      </Typography>
-      <Typography paragraph variant="body1">
-        Explanatory text
       </Typography>
       <form onSubmit={onSubmitHandler}>
         <Stack spacing={2} sx={{pt: "2em"}}>
