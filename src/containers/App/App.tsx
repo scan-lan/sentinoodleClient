@@ -19,7 +19,7 @@ dotenv.config()
 const baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "http://77.100.88.87:5000";
 const api = axios.create({
   baseURL,
-  timeout: 1000
+  timeout: 5000
 })
 
 
@@ -49,7 +49,7 @@ const App = () => {
         <Drawer setMobileOpen={setMobileOpen} mobileOpen={mobileOpen} routes={routes} />
         <Container maxWidth="sm">
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home api={api} />} />
             <Route path="test" element={<Test />} />
             <Route path="messages" element={<AddMessage api={api} />} />
           </Routes>
