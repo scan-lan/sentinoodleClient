@@ -9,10 +9,12 @@ import Session from "../../schemas/Session";
 import Message from "../../schemas/Message";
 import SessionDisplay from "../../components/SessionDisplay";
 import { AxiosInstance } from "axios";
+import Medication from "../../schemas/Medication";
 
 interface SessionInfo {
   session: Session,
-  messages: string[]
+  messages: string[],
+  medication: Medication
 }
 
 const ViewSession = ({ api }: { api: AxiosInstance }) => {
@@ -48,18 +50,24 @@ const ViewSession = ({ api }: { api: AxiosInstance }) => {
       return;
     }
 
-    const { data: messages } = await api.get<Message[]>(`/messages/${session.id}`)
+    const { data: messages } = await api.get<Message[]>(`/messages/${session.id}`);
+
+    let messageTexts;
     if (!messages) {
       showError("Could not find messages for given session ID");
       setSessionRetrieved(false);
       return;
     } else {
-      const messageTexts = messages.map((message) => message.message_text);
-      setSessionInfo({session: session, messages: messageTexts});
-      showSuccess();
+      messageTexts = messages.map((message) => message.message_text);
     }
 
-    setSessionRetrieved(true);
+    const { status, data: medication } = await api.get<Medication>(`/medicationById/${session.medication_id}`);
+
+    if (status === 200) {
+      setSessionInfo({session: session, messages: messageTexts, medication: medication});
+      showSuccess();
+      setSessionRetrieved(true);
+    }
   }
 
   return (
@@ -84,7 +92,11 @@ const ViewSession = ({ api }: { api: AxiosInstance }) => {
           </Button>
         </Stack>
       </form>
-      {(sessionRetrieved && sessionInfo) ? <SessionDisplay session={sessionInfo.session} messages={sessionInfo.messages} /> : null}
+      {(sessionRetrieved && sessionInfo) ? <SessionDisplay
+        session={sessionInfo.session}
+        messages={sessionInfo.messages}
+        medication={sessionInfo.medication}
+      /> : null}
     </>
   );
 }
