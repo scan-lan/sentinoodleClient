@@ -29,7 +29,7 @@ const UpdateWaitPeriod = ({ api }: {api: AxiosInstance}) => {
   }
   const showSuccess = () => {
     setAlertState({
-        text: "Wait time updated successfully",
+        text: "Wait period updated successfully",
         type: "success",
         open: true
       })
@@ -48,7 +48,7 @@ const UpdateWaitPeriod = ({ api }: {api: AxiosInstance}) => {
       console.log(e)
       return;
     }
-    const response = await api.post("/messageWaitTime", requestBody);
+    const response = await api.put("/messageWaitTime", requestBody);
     if (response.status === 200) showSuccess();
     else showError("Could not update wait period");
   }
