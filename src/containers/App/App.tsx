@@ -13,6 +13,7 @@ import Home from "../../routes/Home";
 import NavBar from "../../components/NavBar";
 import UpdateWaitPeriod from "../../routes/UpdateWaitPeriod";
 import ViewSession from "../../routes/ViewSession";
+import NewSession from "../../routes/NewSession";
 dotenv.config()
 
 const baseURL = process.env.NODE_ENV === "development" ? "http://localhost:5000" : "http://77.100.88.87:5000";
@@ -37,6 +38,7 @@ const App = () => {
 
   const routes = [
     {route: "/", text: "Home"},
+    {route: "newSession", text: "Create Session"},
     {route: "session", text: "View Session"},
     {route: "messages", text: "Add Message"},
     {route: "waitPeriod", text: "Update Wait Period"}
@@ -52,6 +54,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home api={api} />} />
             <Route path="session" element={<ViewSession api={api} />} />
+            <Route path="newSession" element={<NewSession api={api} />} />
             <Route path="messages" element={<AddMessage api={api} />} />
             <Route path="waitPeriod" element={<UpdateWaitPeriod api={api} />} />
           </Routes>
