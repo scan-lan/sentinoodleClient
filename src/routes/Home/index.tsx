@@ -9,6 +9,7 @@ import AlertState from "../../schemas/AlertState";
 import Session from "../../schemas/Session";
 import Summary from "../../schemas/Summary";
 import SummaryDisplay from "../../components/SummaryDisplay";
+import {Link} from "react-router-dom";
 
 const Home = ({ api }: { api: AxiosInstance }) => {
   const [deviceId, setDeviceId] = useState<string>("");
@@ -59,11 +60,19 @@ const Home = ({ api }: { api: AxiosInstance }) => {
       <Typography variant="h4" align="right" sx={{pb: "1em", pt: ".2em"}}>
         Home
       </Typography>
+      <Stack direction="row" spacing={1} sx={{pb: "2em"}}>
+        <Button fullWidth variant="contained" component={Link} to="/newSession">
+          Create session
+        </Button>
+        <Button fullWidth variant="contained" component={Link} to="/session">
+          View session
+        </Button>
+      </Stack>
       <Typography paragraph>
-        Enter your device ID to see a summary of events from your day.
+        Enter your device ID to see a summary of events from your day:
       </Typography>
       <form onSubmit={onSubmitHandler}>
-        <Stack spacing={2} sx={{pt: "2em"}}>
+        <Stack spacing={2} sx={{pt: ".5em"}}>
           <TextField
             required
             id="device-id"
