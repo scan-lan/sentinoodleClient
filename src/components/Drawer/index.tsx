@@ -23,7 +23,7 @@ const Drawer = ({ setMobileOpen, mobileOpen, routes }: DrawerProps) => {
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
       aria-label="side bar"
     >
       <MUIDrawer
@@ -34,7 +34,7 @@ const Drawer = ({ setMobileOpen, mobileOpen, routes }: DrawerProps) => {
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: 'block', sm: 'none' },
+          display: { sm: 'block', md: 'none' },
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
       >
@@ -43,11 +43,12 @@ const Drawer = ({ setMobileOpen, mobileOpen, routes }: DrawerProps) => {
       <MUIDrawer
         variant="permanent"
         sx={{
-          display: { xs: 'none', sm: 'block' },
+          display: { xs: 'none', sm: 'none', md: 'block'},
           '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
         }}
         open
       >
+
         {drawerContent}
       </MUIDrawer>
     </Box>

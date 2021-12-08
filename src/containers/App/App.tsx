@@ -22,17 +22,18 @@ const api = axios.create({
 })
 
 
-const theme = createTheme({
+const App = () => {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [themeMode, setThemeMode] = React.useState<"light" | "dark">("dark");
+
+  const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: themeMode,
   },
   typography: {
     fontFamily: "Atkinson Hyperlegible, sans-serif"
   }
 })
-
-const App = () => {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const routes = [
     {route: "/", text: "Home"},
@@ -44,7 +45,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme} >
       <CssBaseline />
-      <NavBar onMenuClick={() => setMobileOpen(!mobileOpen)} />
+      <NavBar onMenuClick={() => setMobileOpen(!mobileOpen)} themeMode={themeMode} setThemeMode={setThemeMode} />
       <Box sx={{ display: 'flex' }}>
         <Drawer setMobileOpen={setMobileOpen} mobileOpen={mobileOpen} routes={routes} />
         <Container maxWidth="sm">
