@@ -24,10 +24,10 @@ const ViewSession = ({ api }: { api: AxiosInstance }) => {
   const [alertState, setAlertState] = useState<AlertState>({text: "", type: "error", open: false});
   const showError = (text: string) => {
     setAlertState({
-        text: text,
-        type: "error",
-        open: true
-      })
+      text: text,
+      type: "error",
+      open: true
+    })
   }
   const showSuccess = () => {
     setAlertState({
