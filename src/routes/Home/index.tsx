@@ -37,20 +37,30 @@ const Home = ({ api }: { api: AxiosInstance }) => {
 
   const onSubmitHandler = async (e: FormEvent) => {
     e.preventDefault()
-    const { data: session } = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
-    if (!session) {
-      showError("Could not find session for given device ID");
-      setSummaryRetrieved(false);
-      return;
-    }
-
-    const { status: summaryStatus, data: summary } = await api.get<Summary>(`/daySummary/${session.id}`);
-    if (summaryStatus === 200) showSuccess();
-    else {
-      showError("Summary could not be retrieved with this device ID");
-      return;
-    }
-    setSummaryInfo(summary);
+    // const { data: session } = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
+    // if (!session) {
+    //   showError("Could not find session for given device ID");
+    //   setSummaryRetrieved(false);
+    //   return;
+    // }
+    //
+    // const { status: summaryStatus, data: summary } = await api.get<Summary>(`/daySummary/${session.id}`);
+    // if (summaryStatus === 200) showSuccess();
+    // else {
+    //   showError("Summary could not be retrieved with this device ID");
+    //   return;
+    // }
+    setSummaryInfo({
+      last_room_entered: {
+        room: "bedroom",
+        time: "15:47:32 06/12/2021"
+      },
+      time_woke_up: "07:35:42 06/12/2021",
+      messages_received_today: [
+        "You have so much to be proud of",
+        "You are going to have a great day",
+        "You have so much to be proud of"],
+      last_ate: "13:02:25 06/12/2021"})
     setSummaryRetrieved(true);
   }
 

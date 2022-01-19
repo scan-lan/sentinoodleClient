@@ -43,31 +43,50 @@ const ViewSession = ({ api }: { api: AxiosInstance }) => {
 
   const onSubmitHandler = async (e: FormEvent) => {
     e.preventDefault()
-    const { data: session } = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
-    if (!session) {
-      showError("Could not find session for given device ID");
-      setSessionRetrieved(false);
-      return;
-    }
-
-    const { data: messages } = await api.get<Message[]>(`/messages/${session.id}`);
-
-    let messageTexts;
-    if (!messages) {
-      showError("Could not find messages for given session ID");
-      setSessionRetrieved(false);
-      return;
-    } else {
-      messageTexts = messages.map((message) => message.message_text);
-    }
-
-    const { status, data: medication } = await api.get<Medication>(`/medicationById/${session.medication_id}`);
-
-    if (status === 200) {
-      setSessionInfo({session: session, messages: messageTexts, medication: medication});
-      showSuccess();
-      setSessionRetrieved(true);
-    }
+    // const { data: session } = await api.get<Session>(`/sessionByDeviceID/${deviceId}`);
+    // if (!session) {
+    //   showError("Could not find session for given device ID");
+    //   setSessionRetrieved(false);
+    //   return;
+    // }
+    //
+    // const { data: messages } = await api.get<Message[]>(`/messages/${session.id}`);
+    //
+    // let messageTexts;
+    // if (!messages) {
+    //   showError("Could not find messages for given session ID");
+    //   setSessionRetrieved(false);
+    //   return;
+    // } else {
+    //   messageTexts = messages.map((message) => message.message_text);
+    // }
+    //
+    // const { status, data: medication } = await api.get<Medication>(`/medicationById/${session.medication_id}`);
+    //
+    // if (status === 200) {
+    setSessionInfo({
+      session: {
+        id: 3,
+        device_id: "e00fce68c8c00485cd7a3208",
+        medication_id: 2,
+        datetime_started: "17:54:29 02/12/2021",
+        message_index: 1,
+        message_wait_period_minutes: 15
+      },
+      messages: [
+        "You have so much to be proud of",
+        "You are going to have a great day"],
+      medication: {
+        id: 2,
+        name: "Enalapril",
+        dosage: 2,
+        dosage_frequency: 3,
+        doses_taken_today: 0
+      }
+    });
+    showSuccess();
+    setSessionRetrieved(true);
+    // }
   }
 
   return (
